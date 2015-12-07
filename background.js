@@ -2,6 +2,9 @@ var ignore = [
 
 ];
 
+// Default max-age 6 months in seconds
+var max_age = "15570000";
+
 chrome.webRequest.onHeadersReceived.addListener(
 	function(details) {
 		var url = new URL(details.url);
@@ -16,7 +19,7 @@ chrome.webRequest.onHeadersReceived.addListener(
 				return { };
 			}
 			
-			var header = "";
+			var header = "max-age=" + max_age;
 
 			details.responseHeaders.push({
 				"name": "Public-Key-Pins",
