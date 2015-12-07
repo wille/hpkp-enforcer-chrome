@@ -1,0 +1,17 @@
+{
+	"name": "HKPK Enforcer",
+	"version": "0.1",
+	"description": "Forces Chrome to use HKPK on all HTTPS enabled websites",
+	"background": { 
+		"scripts": ["background.js"]
+	},
+	"icons": {
+		"128": "icon.png"
+	},
+	"manifest_version": 2,
+	"permissions": [
+		"webRequest",
+		"webRequestBlocking",
+		"https://*/*"
+	]
+}
