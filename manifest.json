@@ -1,7 +1,7 @@
 {
-	"name": "HKPK Enforcer",
+	"name": "HPKP Enforcer",
 	"version": "0.1",
-	"description": "Forces Chrome to use HKPK on all HTTPS enabled websites",
+	"description": "Forces Chrome to use certificate pinning on all HTTPS enabled websites",
 	"background": { 
 		"scripts": ["background.js"]
 	},
