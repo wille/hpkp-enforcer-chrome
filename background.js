@@ -18,7 +18,7 @@ chrome.webRequest.onHeadersReceived.addListener(
 			var header = "";
 
 			for (var pin in pending) {
-				header += "pin-sha256=\"" + pin "\";";
+				header += "pin-sha256=\"" + pin "\"; ";
 			}
 			
 			header += "max-age=" + max_age;
