@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function() {
 				
 			localStorage[host] = pin;
 			chrome.tabs.reload(tab.id, null, function() {} );
+			
+			document.write("Complete!");
 		});
 	}, false);
 }, false);
