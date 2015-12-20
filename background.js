@@ -5,28 +5,22 @@ chrome.webRequest.onHeadersReceived.addListener(
 	function(details) {
 		var url = new URL(details.url);
 		
-		var pending = localStorage["pending"];
+		var pin = localStorage[url.hostname];
 		
-		if (pending != undefined && pending.indexOf(url.hostname) != -1 && url.protocol === "https:") {
-			var pins = pending[url.hostname];
-			
+		if (pin != undefined && url.protocol === "https:") {			
 			for (var i = 0; i < details.responseHeaders.length; i++) {
 				if (details.responseHeaders[i].name.toLowerCase() === "public-key-pins")
 				return { };
 			}
 			
-			var header = "";
-
-			for (var pin in pending) {
-				header += "pin-sha256=\"" + pin "\"; ";
-			}
-			
-			header += "max-age=" + max_age;
+			var header = "pin-sha256=\"" + pin + "\"; max-age=" + max_age;
 
 			details.responseHeaders.push({
 				"name": "Public-Key-Pins",
 				"value": header
 			});
+			
+			delete localStorage[url.hostname];
 		}
 
 		return { responseHeaders: details.responseHeaders };

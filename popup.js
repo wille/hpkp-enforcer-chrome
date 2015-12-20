@@ -12,30 +12,24 @@ document.addEventListener("DOMContentLoaded", function() {
 	var loadButton = document.getElementById("load");
 	loadButton.addEventListener("click", function() {
 		chrome.tabs.getSelected(null, function(tab) {
-			chrome.tabs.getSelected(null, function(tab) {
-				var x = document.createElement("a");
-				x.href = tab.url;
+			var x = document.createElement("a");
+			x.href = tab.url;
 								
-				var req = new XMLHttpRequest();
-				req.open("GET", geturl(x.hostname), false);
-				req.send(null);
-				document.getElementById("pinbox").value = req.responseText;
-			});
+			var req = new XMLHttpRequest();
+			req.open("GET", geturl(x.hostname), false);
+			req.send(null);
+			document.getElementById("pinbox").value = req.responseText;
 		});
 	}, false);
 	
 	var addButton = document.getElementById("add");
 	addButton.addEventListener("click", function() {
 		chrome.tabs.getSelected(null, function(tab) {
-			chrome.tabs.getSelected(null, function(tab) {
-				var x = document.createElement("a");
-				x.href = tab.url;
+			var pin = document.getElementById("pinbox").value;
+			var host = document.getElementById("hostbox").value;
 				
-				var req = new XMLHttpRequest();
-				req.open("GET", geturl(x.hostname), false);
-				req.send(null);
-				document.getElementById("pinbox").value = req.responseText;
-			});
+			localStorage[host] = pin;
+			chrome.tabs.reload(tab.id, null, function() {} );
 		});
 	}, false);
 }, false);
