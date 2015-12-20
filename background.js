@@ -7,7 +7,7 @@ chrome.webRequest.onHeadersReceived.addListener(
 		
 		var pending = localStorage["pending"];
 		
-		if (pending.indexOf(url.hostname) != -1 && url.protocol === "https:") {
+		if (pending != undefined && pending.indexOf(url.hostname) != -1 && url.protocol === "https:") {
 			var pins = pending[url.hostname];
 			
 			for (var i = 0; i < details.responseHeaders.length; i++) {
