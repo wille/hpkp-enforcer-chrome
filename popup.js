@@ -4,8 +4,25 @@ function geturl(host) {
 
 document.addEventListener("DOMContentLoaded", function() {	
 	
-	var addPageButton = document.getElementById("load");
-	addPageButton.addEventListener("click", function() {
+	var loadButton = document.getElementById("load");
+	loadButton.addEventListener("click", function() {
+		chrome.tabs.getSelected(null, function(tab) {
+			chrome.tabs.getSelected(null, function(tab) {
+				var x = document.createElement("a");
+				x.href = tab.url;
+				
+				document.getElementById("hostbox").value = x.hostname;
+				
+				var req = new XMLHttpRequest();
+				req.open("GET", geturl(x.hostname), false);
+				req.send(null);
+				document.getElementById("pinbox").value = req.responseText;
+			});
+		});
+	}, false);
+	
+	var addButton = document.getElementById("add");
+	addButton.addEventListener("click", function() {
 		chrome.tabs.getSelected(null, function(tab) {
 			chrome.tabs.getSelected(null, function(tab) {
 				var x = document.createElement("a");
@@ -18,5 +35,4 @@ document.addEventListener("DOMContentLoaded", function() {
 			});
 		});
 	}, false);
-	
 }, false);
