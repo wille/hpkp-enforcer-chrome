@@ -3,6 +3,11 @@ function geturl(host) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {	
+	chrome.tabs.getSelected(null, function(tab) {
+		var x = document.createElement("a");
+		x.href = tab.url;
+		document.getElementById("hostbox").value = x.hostname;
+	});
 	
 	var loadButton = document.getElementById("load");
 	loadButton.addEventListener("click", function() {
@@ -10,9 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			chrome.tabs.getSelected(null, function(tab) {
 				var x = document.createElement("a");
 				x.href = tab.url;
-				
-				document.getElementById("hostbox").value = x.hostname;
-				
+								
 				var req = new XMLHttpRequest();
 				req.open("GET", geturl(x.hostname), false);
 				req.send(null);
