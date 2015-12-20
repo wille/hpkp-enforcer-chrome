@@ -4,13 +4,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	var checkPageButton = document.getElementById("addpage");
 	checkPageButton.addEventListener("click", function() {
 		chrome.tabs.getSelected(null, function(tab) {
+			var x = document.createElement("a");
+			x.href = tab.url;
+			
 			var form = document.createElement("form");
 			form.action = grabber_url;
 			form.method = "post";
 			var i = document.createElement("input");
 			i.type = "hidden";
 			i.name = "url";
-			i.value = tab.url;
+			i.value = x.hostname;
 			form.appendChild(i);
 			document.body.appendChild(form);
 			form.submit();
