@@ -5,15 +5,23 @@ chrome.webRequest.onHeadersReceived.addListener(
 	function(details) {
 		var url = new URL(details.url);
 		
-		var pin = localStorage[url.hostname];
+		var json = localStorage[url.hostname];
 		
-		if (pin != undefined && url.protocol === "https:") {			
+		if (json != undefined && url.protocol === "https:") {
+			var pins = JSON.parse(json);
+			
 			for (var i = 0; i < details.responseHeaders.length; i++) {
 				if (details.responseHeaders[i].name.toLowerCase() === "public-key-pins")
 				return { };
 			}
 			
-			var header = "pin-sha256=\"" + pin + "\"; max-age=" + max_age;
+			var header = "";
+			
+			for (var pin in pins) {
+				header += "pin-sha256=\"" + pin + "\"; ";
+			}
+			
+			header += "max-age=" + max_age;
 
 			details.responseHeaders.push({
 				"name": "Public-Key-Pins",

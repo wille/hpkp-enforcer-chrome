@@ -18,17 +18,25 @@ document.addEventListener("DOMContentLoaded", function() {
 			var req = new XMLHttpRequest();
 			req.open("GET", geturl(x.hostname), false);
 			req.send(null);
-			document.getElementById("pinbox").value = req.responseText;
+			
+			var json = JSON.parse(req.responseText);
+			
+			document.getElementById("hostpinbox").value = json[0];
+			document.getElementById("rootpinbox").value = json[1];
 		});
 	}, false);
 	
 	var addButton = document.getElementById("add");
 	addButton.addEventListener("click", function() {
 		chrome.tabs.getSelected(null, function(tab) {
-			var pin = document.getElementById("pinbox").value;
+			var pin1 = document.getElementById("hostpinbox").value;
+			var pin2 = document.getElementById("rootpinbox").value;
+
 			var host = document.getElementById("hostbox").value;
-				
-			localStorage[host] = pin;
+			
+			var pins = [ pin1, pin2 ];
+			
+			localStorage[host] = JSON.stringify(pins);
 			chrome.tabs.reload(tab.id, null, function() {} );
 			
 			document.write("Complete!");
