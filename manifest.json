@@ -15,6 +15,7 @@
 	"manifest_version": 2,
 	"permissions": [
 		"webRequest",
+		"webRequestBlocking",
 		"https://*/*",
 		"tabs",
 		"storage"
