@@ -1,5 +1,5 @@
 function geturl(host) {
-	return "https://redpois0n.com/pin.php?url=" + host;
+	return "https://redpois0n.com/getpin.php?url=" + host;
 }
 
 document.addEventListener("DOMContentLoaded", function() {	
