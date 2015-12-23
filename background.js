@@ -10,11 +10,6 @@ chrome.webRequest.onHeadersReceived.addListener(
 		if (json != undefined && url.protocol === "https:") {
 			var pins = JSON.parse(json);
 			
-			for (var i = 0; i < details.responseHeaders.length; i++) {
-				if (details.responseHeaders[i].name.toLowerCase() === "public-key-pins")
-				return { };
-			}
-			
 			var header = "";
 			
 			for (var i = 0; i < pins.length; i++) {
