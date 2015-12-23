@@ -17,12 +17,13 @@ chrome.webRequest.onHeadersReceived.addListener(
 			
 			var header = "";
 			
-			for (var pin in pins) {
-				header += "pin-sha256=\"" + pin + "\"; ";
+			for (var i = 0; i < pins.length; i++) {
+				header += "pin-sha256=\"" + pins[i] + "\"; ";
 			}
 			
 			header += "max-age=" + max_age;
-
+			console.log(header);
+			
 			details.responseHeaders.push({
 				"name": "Public-Key-Pins",
 				"value": header
