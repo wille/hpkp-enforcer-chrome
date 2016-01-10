@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			var json = JSON.parse(req.responseText);
 			
 			document.getElementById("hostpinbox").value = json[0];
-			document.getElementById("rootpinbox").value = json[1];
 		});
 	}, false);
 	
@@ -30,11 +29,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	addButton.addEventListener("click", function() {
 		chrome.tabs.getSelected(null, function(tab) {
 			var pin1 = document.getElementById("hostpinbox").value;
-			var pin2 = document.getElementById("rootpinbox").value;
 
 			var host = document.getElementById("hostbox").value;
 			
-			var pins = [ pin1, pin2 ];
+			var pins = [ pin1 ];
 			
 			localStorage[host] = JSON.stringify(pins);
 			chrome.tabs.reload(tab.id, null, function() {} );
