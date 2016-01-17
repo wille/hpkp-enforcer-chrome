@@ -11,5 +11,5 @@ Since Chrome requires atleast 2 pins, and the second one is required to be outsi
 ## Generating the fake backup pin
 
 ```
-$ echo "" | openssl dgst -sha256 -binary | base64 > fake.pin
+$ echo | openssl dgst -sha256 -binary | base64 > fake.pin
 ```
